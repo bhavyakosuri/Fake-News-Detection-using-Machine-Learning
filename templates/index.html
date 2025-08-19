@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fake News Detector</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>📰 Fake News Detector</h1>
+    <p>Paste a news article or headline. We'll classify it as <strong>REAL</strong> or <strong>FAKE</strong>.</p>
+    <form method="POST">
+      <textarea name="text" rows="10" placeholder="Paste news text here..." required>{{ text or "" }}</textarea>
+      <button type="submit">Predict</button>
+    </form>
+    {% if prediction %}
+      <div class="result">
+        <h2>Prediction: <span class="{{ 'real' if prediction=='REAL' else 'fake' }}">{{ prediction }}</span></h2>
+        {% if proba %}
+          <p>Confidence: {{ (proba * 100) | round(2) }}%</p>
+        {% endif %}
+      </div>
+    {% endif %}
+    <footer>
+      <p>Model: TF‑IDF + PassiveAggressiveClassifier &middot; <a href="https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets" target="_blank" rel="noopener">Dataset</a></p>
+    </footer>
+  </div>
+</body>
+</html>
