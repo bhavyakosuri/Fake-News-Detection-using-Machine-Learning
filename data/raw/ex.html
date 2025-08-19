@@ -1,1 +1,48 @@
 kaggle datasets download -d emineyetm/fake-news-detection-datasets -p data/raw -unzip
+
+STEPS:
+How to use with the Kaggle dataset
+
+1.Extract the zip.
+
+Put the Kaggle files into data/raw/
+
+Quick way (Kaggle CLI):
+
+kaggle datasets download -d emineyetm/fake-news-detection-datasets -p data/raw -unzip
+
+
+2.Train:
+
+python -m pip install -r requirements.txt
+python train.py --data_dir data/raw --model_path models/model.joblib
+
+
+This handles preprocessing, TF-IDF vectorization (1–2 grams, English stop-words, sublinear TF), trains a PassiveAggressiveClassifier, and saves metrics (models/metrics.json) + the model (models/model.joblib).
+
+3.Run the Flask app:
+
+python app.py
+
+
+Open http://127.0.0.1:5000 for a simple UI with real-time predictions.
+
+4.(Optional) Production:
+
+gunicorn -c gunicorn.conf.py app:app
+# or Docker
+docker build -t fake-news-ml-flask .
+docker run -p 8000:8000 fake-news-ml-flask
+
+
+Then open http://localhost:8000/.
+
+The project meets the following things:
+
+End-to-end ML + NLP pipeline: preprocessing, TF-IDF, PassiveAggressiveClassifier.
+
+Model evaluation with accuracy, precision, recall, F1, confusion matrix, and a saved classification_report.
+
+Flask deployment for real-time predictions (form UI + JSON API).
+
+Clean, production-friendly structure with Dockerfile, Gunicorn config.
