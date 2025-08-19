@@ -1,4 +1,4 @@
-# Fake-News-Detection-using-Machine-Learning — Flask App
+# Fake-News-Detection-using-MachineLearning(Passive Aggressive Classifier)— Flask App
 
 End-to-end fake news detector trained on the Kaggle dataset
 **[`emineyetm/fake-news-detection-datasets`](https://www.kaggle.com/datasets/emineyetm/fake-news-detection-datasets)**,
